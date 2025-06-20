@@ -2,15 +2,14 @@ using System.Collections.Generic;
 
 namespace MyProjectApi.Models
 {
-  public class User
-  {
-    public int Id { get; set; }
-    public string Username { get; set; }
+    public class User
+    {
+        public int Id { get; set; }
+        public string Username { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
+        public bool IsVIP { get; set; }
 
-    public string Password { get; set; }
-
-    public bool isVip { get; set; }
-
-    public ICollection<WordScoring> WordScorings { get; set; } = new List<WordScoring>();
-  }
+        // การประกาศ ICollection เพื่อบอกว่า User จะมีข้อมูลแบบ WordScoring หลายอันนะ
+        public ICollection<WordScoring> WordScorings { get; set; } = new List<WordScoring>();
+    }
 }

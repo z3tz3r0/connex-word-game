@@ -1,22 +1,16 @@
 using System;
 
-namespace MyprojectApi.Models
+namespace MyProjectApi.Models
 {
-  public class WordScoring
-  {
-    public int UserId { get; set; }
+    public class WordScoring
+    {
+        public int Id { get; set; }
+        public string Word { get; set; } = string.Empty;
+        public int Score { get; set; }
+        public DateTime CreatedTime { get; set; }
+        public DateTime ModifiedTime { get; set; }
 
-    public string Word { get; set; }
-
-    public int Score { get; set; }
-
-    public DateTime CreateTime { get; set; }
-
-    public DateTime ModifiedTime { get; set; }
-
-    public int UserId { get; set; }
-
-    public User User { get; set; }
-
-  }
+        public int UserId { get; set; }
+        public User User { get; set; } = null!;
+    }
 }
