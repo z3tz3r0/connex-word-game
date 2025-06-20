@@ -1,0 +1,6 @@
+@connex_word_game_api_HostAddress = http://localhost:5012
+
+GET {{connex_word_game_api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
