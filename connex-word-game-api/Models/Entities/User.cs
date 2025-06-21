@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace MyProjectApi.Models
+namespace MyProjectApi.Models.Entities
 {
     public class User
     {

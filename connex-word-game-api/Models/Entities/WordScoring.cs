@@ -1,6 +1,6 @@
 using System;
 
-namespace MyProjectApi.Models
+namespace MyProjectApi.Models.Entities
 {
     public class WordScoring
     {

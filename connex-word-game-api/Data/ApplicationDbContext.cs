@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using MyProjectApi.Models;
+using MyProjectApi.Models.Entities;
 
 namespace MyProjectApi.Data
 {
