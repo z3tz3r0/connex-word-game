@@ -48,13 +48,13 @@ export class Register {
     this.registerError = null;
     if (this.registerForm.valid) {
       this.authService.register(this.registerForm.value).subscribe({
-        next: (response) => {
-          console.log('Registration successful!', response);
+        next: () => {
+          // console.log('Registration successful!', response);
           alert('Registration Successful! Please log in.'); // แจ้งเตือนผู้ใช้
           this.router.navigate(['/login']); // พาไปหน้า Login
         },
         error: (err) => {
-          console.error('Registration failed', err);
+          // console.error('Registration failed', err);
           this.registerError =
             err.error?.message || 'An unknown error occurred.';
         },

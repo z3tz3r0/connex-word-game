@@ -2,6 +2,14 @@
   <div class="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
     <h2 class="text-2xl font-bold text-center text-gray-800">Login</h2>
 
+    <div
+      *ngIf="loginError"
+      class="p-4 text-sm text-red-700 bg-red-100 rounded-lg"
+      role="alert"
+    >
+      {{ loginError }}
+    </div>
+
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-16">
       <app-form-input [control]="username" label="Username" inputType="text">
       </app-form-input>

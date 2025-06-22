@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import {
   FormBuilder,
@@ -13,7 +14,7 @@ import { FormInput } from '../../shared/form-input/form-input';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, FormInput, RouterLink],
+  imports: [CommonModule, ReactiveFormsModule, FormInput, RouterLink],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
@@ -36,12 +37,12 @@ export class Login {
     this.loginError = null;
     if (this.loginForm.valid) {
       this.authService.login(this.loginForm.value).subscribe({
-        next: (response) => {
-          console.log('Login successful!', response);
+        next: () => {
+          // console.log('Login successful!', response);
           this.router.navigate(['/']);
         },
         error: (err) => {
-          console.error('Login failed', err);
+          // console.error('Login failed', err);
           this.loginError = err.error?.message || 'An unknown error occurred.';
         },
       });

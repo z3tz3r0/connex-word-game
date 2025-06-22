@@ -54,12 +54,25 @@ export class Auth {
     }
 
     try {
-      const payload = JSON.parse(atob(token.split('.')[1]));
-
-      return payload.name;
+      const payload: { name?: string } = jwtDecode(token);
+      return payload.name ?? null;
     } catch (e) {
       console.error('Invalid token:', e);
       return null;
+    }
+  }
+
+  isVip(): boolean {
+    const token = this.getToken();
+    if (!token) {
+      return false;
+    }
+
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      return payload.isVip === 'True';
+    } catch (err) {
+      return false;
     }
   }
 

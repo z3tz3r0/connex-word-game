@@ -1,5 +1,4 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit } from '@angular/core';
 import {
   FormBuilder,
@@ -7,6 +6,8 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { Auth } from '../../services/auth';
+import { Words } from '../../services/words';
 
 @Component({
   selector: 'app-game',
@@ -16,17 +17,19 @@ import {
   styleUrl: './game.css',
 })
 export class Game implements OnInit {
-  private http = inject(HttpClient);
+  private wordsService = inject(Words);
   private fb = inject(FormBuilder);
   private apiUrl = 'http://localhost:5012/api/words';
+  authService = inject(Auth);
 
   wordForm: FormGroup;
   history: any[] = [];
   topPlayers: any[] = [];
+  submissionError: string | null = null;
 
   constructor() {
     this.wordForm = this.fb.group({
-      word: ['', Validators.required],
+      word: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]],
     });
   }
 
@@ -35,28 +38,54 @@ export class Game implements OnInit {
   }
 
   loadData(): void {
-    this.http.get<any[]>(`${this.apiUrl}/history`).subscribe((data) => {
+    this.wordsService.getHistory().subscribe((data) => {
+      console.log('Received history data:', data);
       this.history = data;
     });
 
-    this.http.get<any[]>(`${this.apiUrl}/top5`).subscribe((data) => {
+    this.wordsService.getTop5().subscribe((data) => {
       this.topPlayers = data;
     });
   }
 
   onWordSubmit(): void {
     if (this.wordForm.invalid) return;
+    this.submissionError = null;
 
     const wordData = { word: this.wordForm.value.word };
-    this.http.post(this.apiUrl, wordData).subscribe({
+    this.wordsService.addWord({ word: this.wordForm.value.word }).subscribe({
       next: () => {
-        alert('Word submitted successfully!');
         this.wordForm.reset();
         this.loadData();
       },
       error: (err) => {
-        alert(err.error?.message || 'Failed to submit word.');
+        // alert(err.error?.message || 'Failed to submit word.');
+        this.submissionError = err.error?.message || 'Failed to submit word.';
       },
     });
+  }
+
+  onDelete(id: number): void {
+    console.log('Attempting to delete ID:', id);
+    if (confirm('are you sure?')) {
+      this.wordsService.deleteWord(id).subscribe({
+        next: () => {
+          this.loadData();
+        },
+        error: (err) => {
+          this.submissionError = err.error?.message || 'Failed to delete word.';
+        },
+      });
+    }
+  }
+
+  onEdit(item: any): void {
+    const newWord = prompt('enter the new word: ', item.word);
+    if (newWord && newWord.trim() !== '') {
+      this.wordsService.editWord(item.id, { word: newWord }).subscribe({
+        next: () => this.loadData(),
+        error: (err) => alert(err.error?.message || 'Failed to edit word.'),
+      });
+    }
   }
 }

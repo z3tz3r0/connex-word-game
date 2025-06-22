@@ -193,7 +193,7 @@ namespace MyProjectApi.Controllers
 
     [HttpDelete("{id}")]
     [Authorize(Policy = "VipOnly")]
-    public async Task<IActionResult> DeleteWord(int id)
+    public async Task<IActionResult> DeleteWord([FromRoute] int id)
     {
       var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
@@ -202,11 +202,12 @@ namespace MyProjectApi.Controllers
         return Unauthorized();
       }
 
-      var wordScoring = await _context.WordScorings.FindAsync();
+      var wordScoring = await _context.WordScorings.FindAsync(id);
       if (wordScoring == null) return NotFound();
       if (wordScoring.UserId != userId) return Forbid();
 
       _context.WordScorings.Remove(wordScoring);
+      await _context.SaveChangesAsync();
       return NoContent();
     }
   }

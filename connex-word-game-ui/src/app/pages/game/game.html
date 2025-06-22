@@ -1,13 +1,15 @@
 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
   <div class="md:col-span-2 bg-white p-6 rounded-lg shadow-md">
     <h2 class="text-2xl font-bold mb-4">Play Game</h2>
+
+    <!-- form ไว้ส่งคำใหม่ ๆ  -->
     <form [formGroup]="wordForm" (ngSubmit)="onWordSubmit()">
       <div class="flex items-start gap-2">
         <input
           formControlName="word"
           type="text"
           placeholder="Enter a word"
-          class="flex-grow px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+          class="flex-grow px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 placeholder:text-gray-400"
         />
         <button
           type="submit"
@@ -18,7 +20,15 @@
         </button>
       </div>
     </form>
+    @if (submissionError) {
+    <p
+      class="mt-4 p-3 bg-red-100 text-red-700 border border-red-400 rounded-md"
+    >
+      {{ submissionError }}
+    </p>
+    }
 
+    <!-- ไว้แสดง History ของ user คนนั้น ๆ -->
     <h3 class="text-xl font-bold mt-8 mb-4">My History</h3>
     <ul class="space-y-2">
       <li
@@ -27,6 +37,20 @@
       >
         <span>{{ item.word }}</span>
         <span class="font-semibold">{{ item.score }} points</span>
+        <div *ngIf="authService.isVip()" class="flex gap-2">
+          <button
+            (click)="onEdit(item)"
+            class="text-sm text-blue-600 hover:underline"
+          >
+            Edit
+          </button>
+          <button
+            (click)="onDelete(item.id)"
+            class="text-sm text-red-600 hover:underline"
+          >
+            Delete
+          </button>
+        </div>
       </li>
     </ul>
   </div>
