@@ -1,0 +1,57 @@
+<div class="flex justify-center items-center mt-10">
+  <div class="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
+    <h2 class="text-2xl font-bold text-center text-gray-800">Register</h2>
+
+    <div
+      *ngIf="registerError"
+      class="p-4 text-sm text-red-700 bg-red-100 rounded-lg"
+      role="alert"
+    >
+      {{ registerError }}
+    </div>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="space-y-6">
+      <app-form-input
+        [control]="username"
+        label="Username"
+        inputType="text"
+      ></app-form-input>
+      <app-form-input
+        [control]="password"
+        label="Password"
+        inputType="password"
+      ></app-form-input>
+
+      <div class="flex items-center">
+        <input
+          id="isVIP"
+          type="checkbox"
+          formControlName="isVIP"
+          class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
+        />
+        <label for="isVIP" class="ml-2 block text-sm text-gray-900"
+          >Register as a VIP member</label
+        >
+      </div>
+
+      <div>
+        <button
+          type="submit"
+          [disabled]="registerForm.invalid"
+          class="w-full px-4 py-2 my-4 font-bold text-white bg-indigo-600 rounded-md hover:bg-indigo-700 disabled:bg-gray-400 cursor-pointer"
+        >
+          Create Account
+        </button>
+      </div>
+
+      <p class="text-sm text-center">
+        Already have an account?
+        <a
+          routerLink="/login"
+          class="font-medium text-indigo-600 hover:text-indigo-500 cursor-pointer"
+          >Sign in</a
+        >
+      </p>
+    </form>
+  </div>
+</div>

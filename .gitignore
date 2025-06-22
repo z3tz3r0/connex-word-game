@@ -1,0 +1,22 @@
+# Dependencies
+**/[Bb]in/
+**/[Oo]bj/
+
+# VS Code
+.vscode/
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.sln.docstates
+
+# User-specific files
+*.DS_Store
+*.Spotlight-V100
+*.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Rider
+.idea/
