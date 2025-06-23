@@ -172,11 +172,28 @@ namespace MyProjectApi.Controllers
       {
         return Unauthorized();
       }
-
       var wordScoring = await _context.WordScorings.FindAsync(id);
 
       if (wordScoring == null) return NotFound();
       if (wordScoring.UserId != userId) return Forbid();
+
+      var wordExists = await _context.WordScorings.AnyAsync(ws => ws.UserId == userId && ws.Word.ToLower() == dto.Word.ToLower() && ws.Id != id);
+
+      if (wordExists)
+      {
+        return BadRequest(new {message = "You already submitted this word."});
+      }
+
+      var user = await _context.Users.FindAsync(userId);
+      if (user == null) return Unauthorized();
+
+      int baseScore = CalculateScore(dto.Word);
+      int finalScore = ApplyBonus(baseScore, user.IsVIP);
+
+      wordScoring.Word = dto.Word;
+      wordScoring.Score = finalScore;
+      wordScoring.ModifiedTime = DateTime.UtcNow;
+
 
       await _context.SaveChangesAsync();
 
@@ -185,7 +202,7 @@ namespace MyProjectApi.Controllers
         Id = wordScoring.Id,
         Word = wordScoring.Word,
         Score = wordScoring.Score,
-        CreateTime = wordScoring.CreatedTime
+        CreateTime = wordScoring.ModifiedTime
       };
 
       return Ok(responseDto);

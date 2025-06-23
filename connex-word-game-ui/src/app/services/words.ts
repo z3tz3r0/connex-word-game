@@ -21,7 +21,7 @@ export class Words {
     return this.http.post(this.apiUrl, wordData);
   }
 
-  editWord(id: number, wordData: { word: string }): Observable<any> {
+  editWord(id: number, wordData: { Word: string }): Observable<any> {
     return this.http.put(`${this.apiUrl}/${id}`, wordData);
   }
 

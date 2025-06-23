@@ -39,7 +39,6 @@ export class Game implements OnInit {
 
   loadData(): void {
     this.wordsService.getHistory().subscribe((data) => {
-      console.log('Received history data:', data);
       this.history = data;
     });
 
@@ -66,7 +65,6 @@ export class Game implements OnInit {
   }
 
   onDelete(id: number): void {
-    console.log('Attempting to delete ID:', id);
     if (confirm('are you sure?')) {
       this.wordsService.deleteWord(id).subscribe({
         next: () => {
@@ -81,8 +79,9 @@ export class Game implements OnInit {
 
   onEdit(item: any): void {
     const newWord = prompt('enter the new word: ', item.word);
+    console.log(newWord);
     if (newWord && newWord.trim() !== '') {
-      this.wordsService.editWord(item.id, { word: newWord }).subscribe({
+      this.wordsService.editWord(item.id, { Word: newWord }).subscribe({
         next: () => this.loadData(),
         error: (err) => alert(err.error?.message || 'Failed to edit word.'),
       });
