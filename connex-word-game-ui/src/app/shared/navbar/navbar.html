@@ -1,8 +1,8 @@
 <header class="bg-gray-800 text-white shadow-md">
   <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-    <a routerLink="/" class="text-2xl font-bold">Connex Word Game</a>
+    <a routerLink="/" class="text-md sm:text-2xl font-bold">Connex Word Game</a>
 
-    <div>
+    <div class="flex justify-end items-center">
       <ng-container *ngIf="!authService.isLoggedIn()">
         <a routerLink="/login" class="px-4 py-2 rounded hover:bg-gray-700"
           >Login</a
@@ -15,10 +15,10 @@
       </ng-container>
 
       <ng-container *ngIf="authService.isLoggedIn()">
-        <span class="text-white mr-4">Welcome, {{ username }}!</span>
+        <span class="text-white mr-4 text-end">Welcome, {{ username }}!</span>
         <button
           (click)="logout()"
-          class="px-4 py-2 bg-red-600 rounded hover:bg-red-700 cursor-pointer"
+          class="text-sm sm:text-base px-4 py-2 bg-red-600 rounded hover:bg-red-700 cursor-pointer"
         >
           Logout
         </button>
