@@ -3451,11 +3451,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\Full Stack Developer project\\connex-word_game-ang_dotnet\\connex-word-game-api\\connex-word-game-api.csproj",
+      "projectUniqueName": "F:\\developers\\connex-word_game-ang_dotnet\\connex-word-game-api\\connex-word-game-api.csproj",
       "projectName": "connex-word-game-api",
-      "projectPath": "F:\\Full Stack Developer project\\connex-word_game-ang_dotnet\\connex-word-game-api\\connex-word-game-api.csproj",
+      "projectPath": "F:\\developers\\connex-word_game-ang_dotnet\\connex-word-game-api\\connex-word-game-api.csproj",
       "packagesPath": "C:\\Users\\Worldlogic\\.nuget\\packages\\",
-      "outputPath": "F:\\Full Stack Developer project\\connex-word_game-ang_dotnet\\connex-word-game-api\\obj\\",
+      "outputPath": "F:\\developers\\connex-word_game-ang_dotnet\\connex-word-game-api\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -3541,7 +3541,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

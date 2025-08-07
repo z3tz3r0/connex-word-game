@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "4hxyX9TSVbI=",
+  "dgSpecHash": "KsRUma8w37Q=",
   "success": true,
-  "projectFilePath": "F:\\Full Stack Developer project\\connex-word_game-ang_dotnet\\connex-word-game-api\\connex-word-game-api.csproj",
+  "projectFilePath": "F:\\developers\\connex-word_game-ang_dotnet\\connex-word-game-api\\connex-word-game-api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Worldlogic\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\Worldlogic\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
